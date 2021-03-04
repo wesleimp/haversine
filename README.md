@@ -24,7 +24,7 @@ iex> Haversine.distance({-74.00597, 40.71427}, {-70.56656, -33.42628})
 8251609.780264794
 ```
 
-Passing a list of latitude-longitude pairs
+Passing a list of longitude-latitude pairs
 
 ```elixir
 iex> Haversine.distance([
