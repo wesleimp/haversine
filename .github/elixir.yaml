@@ -1,0 +1,42 @@
+name: Elixir CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        otp: [23]
+        elixir: [1.11]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - uses: actions/cache@v1
+        id: deps-cache
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+
+      - uses: actions/cache@v1
+        id: build-cache
+        with:
+          path: _build
+          key: ${{ runner.os }}-build-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Run tests
+        run : MIX_ENV=test mix test
+
+      - run : MIX_ENV=test mix format --check-formatted
