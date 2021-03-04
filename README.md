@@ -70,4 +70,4 @@ mix test
 
 ---
 
-Special thanks to @vnbrs 
+Special thanks to **[@vnbrs](https://github.com/vnbrs)** 
