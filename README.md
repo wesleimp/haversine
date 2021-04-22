@@ -1,4 +1,4 @@
-# Haversine
+# Haversine [![Elixir CI](https://github.com/wesleimp/haversine/actions/workflows/elixir.yaml/badge.svg)](https://github.com/wesleimp/haversine/actions/workflows/elixir.yaml)
 
 Calculate great circle distances (shortest travel distance on the surface of a spherical Earth) given a two longitude-latitude pairs.
 
